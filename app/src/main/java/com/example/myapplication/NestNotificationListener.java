@@ -30,9 +30,10 @@ public class NestNotificationListener extends NotificationListenerService {
 
 //        StatusBarNotification[] notifications = getActiveNotifications();
 
-        if (!sbn.getPackageName().equals(getString(R.string.nest_package))) {
+        Log.d(TAG, "Incoming Notification: " + sbn);
+        if (!sbn.getPackageName().equals(getString(R.string.chromecast_app))) {
             Log.d(TAG, "skipping notification, it's not from '"
-                    +getString(R.string.nest_package)+"', actually from '"+sbn.getNotification()+"'");
+                    +getString(R.string.chromecast_app)+"', actually from '"+sbn.getNotification()+"'");
 
             // TODO remove
 //            StatusBarNotification[] notifications = getActiveNotifications();

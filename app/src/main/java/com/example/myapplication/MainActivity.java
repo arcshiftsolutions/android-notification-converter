@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import static android.provider.Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS;
+
 import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -13,24 +15,20 @@ import android.content.IntentFilter;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import android.provider.Settings;
+import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.RemoteViews;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 
-import android.provider.Settings;
-import android.text.TextUtils;
-import android.view.View;
-
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.RemoteViews;
-
-import static android.provider.Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -147,22 +145,33 @@ public class MainActivity extends AppCompatActivity {
         RemoteViews bigContentView = new RemoteViews(getPackageName(), R.layout.decbignotification);
         bigContentView.setImageViewResource(R.id.aqq, R.drawable.elmo_gif);
 //        contentView.setImageViewResource(R.id.);
-        Notification noti = new NotificationCompat.Builder(this, getString(R.string.channel_id))
-                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-                .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
-                .setSmallIcon(R.drawable.elmo_gif)
-                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.elmo_gif))
-                .setContent(contentView)
-                .setCustomContentView(contentView)
-//                .setCustomHeadsUpContentView(contentView)
-                .setCustomBigContentView(bigContentView)
+//        Notification noti = new NotificationCompat.Builder(this, getString(R.string.channel_id))
+//                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+//                .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
+//                .setSmallIcon(R.drawable.elmo_gif)
+//                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.elmo_gif))
+//                .setContent(contentView)
+//                .setCustomContentView(contentView)
+////                .setCustomHeadsUpContentView(contentView)
 //                .setCustomBigContentView(bigContentView)
-                .setContentTitle("textTitle")
-                .setContentText("textContent")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-//                .setOngoing(true)
-                .setAutoCancel(true)
+////                .setCustomBigContentView(bigContentView)
+//                .setContentTitle("textTitle")
+//                .setContentText("textContent")
+//                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+////                .setOngoing(true)
+//                .setAutoCancel(true)
+//                .build();
+        Notification noti = new Notification.Builder(this, getString(R.string.channel_id))
+                .setContentTitle("New mail from Vino")
+                .setContentText("What Up")
+                .setStyle(new Notification.BigPictureStyle()
+                        .bigPicture(BitmapFactory.decodeResource(getResources(), R.drawable.elmo_gif)))
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.elmo_gif))
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .build();
+
+//        var style = NotificationCompat.BigPictureStyle.getPictureIcon();
+        //NotificationCompat.BigPictureStyle().bigPicture(BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher_foreground))
 //        Notification.Builder nb = Notification.Builder.recoverBuilder(getApplicationContext(), noti);
 //        (new NotificationCompat.DecoratedCustomViewStyle()).makeContentView(nb);
         notificationManager.notify(1501, noti);
